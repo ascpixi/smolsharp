@@ -42,7 +42,7 @@ Please note that this is not bound to MSBuild - this can also be achieved with c
 As mentioned in the [How does it work](#How-does-it-work) section, the lack of GC means that object allocations are frowned upon, and should be disposed of manually, similarly to C. As all of the BCL classes are missing, this also means that they have to be either re-implemented, or alternatives like the host OS's built-in APIs need to be used. This project also only works on Windows - it depends on importing Win32 classes, and assumes the output binary format is PE, which is only majorly supported by NT-based OS's.
 
 ## Potential improvements
-As this repository focuses on avoiding any kind of external tools, the default MSVC linker was used. However, specialized linkers such as the (Clinkler)(https://github.com/runestubbe/Crinkler) can be used in order to compress the whole binary and avoid any unnecessary sections. 
+As this repository focuses on avoiding any kind of external tools, the default MSVC linker was used. However, specialized linkers such as the [Crinkler](https://github.com/runestubbe/Crinkler) can be used in order to compress the whole binary and avoid any unnecessary sections. 
 
 ## Building
 In order to build any given project, simply type in:
