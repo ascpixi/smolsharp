@@ -35,7 +35,7 @@ All of the functionality of SmolSharp is contained in the `SmolSharp.props` file
 	- `/nodefaultlib` - excludes CRT libraries from the binary
 	- `/fixed` - instructs the operating system to load the binary at a static address, disabling relocations and making the linker skip emitting the `.reloc` section
 	- `/merge:.modules=.rdata` - merges the `.modules` and `.rdata` sections due to their identical attributes.
-6. **Finishing touches** - all leading null bytes are stripped from the binary.
+6. **Finishing touches** - all trailing null bytes are stripped from the binary.
 Please note that this is not bound to MSBuild - this can also be achieved with calling `ilc` calling the linker manually, as demonstrated by the [`MichalStrehovsky/zerosharp`](https://github.com/MichalStrehovsky/zerosharp) repository.
 
 ## Caveats
@@ -49,4 +49,6 @@ In order to build any given project, simply type in:
 ```console
 dotnet publish -r win-x64 -c release
 ```
+In order to build any of the demos, you'll need to have Python installed, as it is used to quickly strip all trailing bytes in the `ModifyBinary` target. This can be also trivially implemented with a batch script or a custom MSBuild task.
+
 For the OpenGL ocean demo, you can quickly compress a GLSL fragment shader using the `ShaderCompressor` project, included with the repository. The shader compressor is a simple C++ program that calls into Windows's built-in cabinet compression API in order to create byte arrays that can then be consumed by the compiled application. It's recommended to also minify your shader - for example, with [`laurentlb/Shader_Minifier`](https://github.com/laurentlb/Shader_Minifier). The `shaderpkg` batch file will use the `shader_minifier` binary in the `./tools` directory. The main fragment shader for `SmolSharp.Ocean` is located in `./src/SmolSharp.Ocean/Shaders/frag.glsl`.
