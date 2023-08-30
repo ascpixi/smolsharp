@@ -1,0 +1,99 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "BFlat.ZeroLib", "BFlat.ZeroLib\BFlat.ZeroLib.shproj", "{5898FE8D-6758-42D0-9303-2AEAAE32C47B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE20C05D-F7EE-485F-B8CA-51A0B3EFC47F}"
+	ProjectSection(SolutionItems) = preProject
+		SmolSharp.props = SmolSharp.props
+	EndProjectSection
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SmolSharp.Win32", "SmolSharp.Win32\SmolSharp.Win32.shproj", "{29D02AAA-5C78-42ED-B1B4-5B30357D78A7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmolSharp.HelloWorld", "SmolSharp.HelloWorld\SmolSharp.HelloWorld.csproj", "{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmolSharp.Mandelbrot", "SmolSharp.Mandelbrot\SmolSharp.Mandelbrot.csproj", "{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmolSharp.Ocean", "SmolSharp.Ocean\SmolSharp.Ocean.csproj", "{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{E0A9C070-823A-4279-9C23-99A056CB0E30}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ShaderCompressor", "ShaderCompressor\ShaderCompressor.vcxproj", "{825D439A-CADC-4473-9381-F06E728D4A9B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Debug|x64.Build.0 = Debug|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Debug|x86.Build.0 = Debug|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Release|x64.ActiveCfg = Release|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Release|x64.Build.0 = Release|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Release|x86.ActiveCfg = Release|Any CPU
+		{AAF9AE2C-43E1-4739-97CB-5B0B096A1042}.Release|x86.Build.0 = Release|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Debug|x64.Build.0 = Debug|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Debug|x86.Build.0 = Debug|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Release|x64.ActiveCfg = Release|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Release|x64.Build.0 = Release|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Release|x86.ActiveCfg = Release|Any CPU
+		{C8C1BA5B-A5BC-4AC8-A562-1645DCDF0425}.Release|x86.Build.0 = Release|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Debug|x64.Build.0 = Debug|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Debug|x86.Build.0 = Debug|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Release|x64.ActiveCfg = Release|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Release|x64.Build.0 = Release|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Release|x86.ActiveCfg = Release|Any CPU
+		{AD0302DC-D9B7-42D2-B52E-3D28FED5AE4F}.Release|x86.Build.0 = Release|Any CPU
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Debug|Any CPU.Build.0 = Debug|x64
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Debug|x64.ActiveCfg = Debug|x64
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Debug|x64.Build.0 = Debug|x64
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Debug|x86.ActiveCfg = Debug|Win32
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Debug|x86.Build.0 = Debug|Win32
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Release|Any CPU.ActiveCfg = Release|x64
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Release|Any CPU.Build.0 = Release|x64
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Release|x64.ActiveCfg = Release|x64
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Release|x64.Build.0 = Release|x64
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Release|x86.ActiveCfg = Release|Win32
+		{825D439A-CADC-4473-9381-F06E728D4A9B}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{825D439A-CADC-4473-9381-F06E728D4A9B} = {E0A9C070-823A-4279-9C23-99A056CB0E30}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {894863AF-D73C-441C-99AC-88062A8430DD}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SmolSharp.Win32\SmolSharp.Win32.projitems*{29d02aaa-5c78-42ed-b1b4-5b30357d78a7}*SharedItemsImports = 13
+		BFlat.ZeroLib\BFlat.ZeroLib.projitems*{5898fe8d-6758-42d0-9303-2aeaae32c47b}*SharedItemsImports = 13
+		SmolSharp.Win32\SmolSharp.Win32.projitems*{ad0302dc-d9b7-42d2-b52e-3d28fed5ae4f}*SharedItemsImports = 5
+		SmolSharp.Win32\SmolSharp.Win32.projitems*{c8c1ba5b-a5bc-4ac8-a562-1645dcdf0425}*SharedItemsImports = 5
+	EndGlobalSection
+EndGlobal

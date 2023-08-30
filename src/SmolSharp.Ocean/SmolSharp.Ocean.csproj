@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<DirectPInvoke Include="opengl32" />
+		<LinkerArg Include="opengl32.lib" />
+		<DirectPInvoke Include="Cabinet" />
+		<LinkerArg Include="Cabinet.lib" />
+		<DirectPInvoke Include="winmm" />
+		<LinkerArg Include="winmm.lib" />
+	</ItemGroup>
+
+	<Import Project="..\SmolSharp.Win32\SmolSharp.Win32.projitems" Label="Shared" />
+
+	<Import Project="../SmolSharp.props" />
+
+</Project>

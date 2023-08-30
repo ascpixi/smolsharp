@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<Import Project="..\SmolSharp.Win32\SmolSharp.Win32.projitems" Label="Shared" />
+
+	<Import Project="../SmolSharp.props" />
+
+</Project>

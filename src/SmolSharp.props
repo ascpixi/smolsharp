@@ -1,0 +1,120 @@
+<Project>
+    <PropertyGroup>
+        <DefineConstants>WINDOWS</DefineConstants>
+        <PublishAot>true</PublishAot>
+        <ImplicitUsings>disable</ImplicitUsings>
+    </PropertyGroup>
+
+    <!-- Use bflat's zerolib as the standard library -->
+	<!-- See https://github.com/bflattened/bflat/ for more details! -->
+	<Import Project=".\BFlat.ZeroLib\BFlat.ZeroLib.projitems" Label="Shared" />
+	<PropertyGroup>
+		<NoStdLib>true</NoStdLib>
+		<NoConfig>true</NoConfig>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+		<RuntimeMetadataVersion>v4.0.30319</RuntimeMetadataVersion>
+		<IlcSystemModule>$(MSBuildProjectName)</IlcSystemModule>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<EntryPointSymbol>smolsharp_main</EntryPointSymbol>
+		<PublishTrimmed>true</PublishTrimmed>
+		<TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+    <ItemGroup>
+		<DirectPInvoke Include="kernel32" />
+		<DirectPInvoke Include="shell32" />
+		<DirectPInvoke Include="user32" />
+		<DirectPInvoke Include="ntdll" />
+		<DirectPInvoke Include="gdi32" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<LinkerArg Remove="$(LinkerArg)"/>
+		<LinkerArg Include="/align:16"></LinkerArg>
+		<LinkerArg Include="/manifestuac:no"></LinkerArg>
+		<LinkerArg Include="/opt:ref /opt:icf"></LinkerArg>
+		<LinkerArg Include="/safeseh:no"></LinkerArg>
+		<LinkerArg Include="/emittoolversioninfo:no"></LinkerArg>
+		<LinkerArg Include="/emitpogophaseinfo"></LinkerArg>
+		<LinkerArg Include="/nodefaultlib"></LinkerArg>
+		<LinkerArg Include="/fixed"></LinkerArg> <!-- disabling relocations makes the linker skip emitting the .reloc section, which saves us about ~100 bytes -->
+		<LinkerArg Include="/merge:.modules=.rdata"></LinkerArg>
+		<LinkerArg Include="user32.lib"></LinkerArg>
+		<LinkerArg Include="shell32.lib"></LinkerArg>
+		<LinkerArg Include="gdi32.lib"></LinkerArg>
+	</ItemGroup>
+
+	<PropertyGroup>
+		<IlcDisableReflection>true</IlcDisableReflection>
+		<DynamicCodeSupport>false</DynamicCodeSupport>
+		<IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+		<IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+		<Optimize>true</Optimize>
+		<OptimizationPreference>Size</OptimizationPreference>
+	</PropertyGroup>
+
+	<UsingTask TaskName="TrimNullBytesTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll">
+		<ParameterGroup>
+			<InputFilePath ParameterType="System.String" Required="true" />
+		</ParameterGroup>
+		<Task>
+			<Reference Include="System.IO" />
+			<Using Namespace="System.IO" />
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+				  byte[] contentBytes = File.ReadAllBytes(InputFilePath);
+				  int length = contentBytes.Length;
+				  while (length > 0 && contentBytes[length - 1] == 0) {
+					  length--;
+				  }
+				  byte[] trimmedBytes = new byte[length];
+				  Array.Copy(contentBytes, trimmedBytes, length);
+				  File.WriteAllBytes(InputFilePath, trimmedBytes);
+				  ]]>
+			</Code>
+		</Task>
+	</UsingTask>
+	
+	<Target Name="ModifyObj" BeforeTargets="LinkNative">
+		<Exec Command="objcopy --remove-section .pdata &quot;$(NativeObject)&quot;" />
+		<Exec Command="objcopy -w --set-section-alignment *=1 &quot;$(NativeObject)&quot;" />
+	</Target>
+
+	<Target Name="ModifyBinary" AfterTargets="LinkNative">
+		<PropertyGroup>
+			<PyTrimNull>b = open(r'$(NativeBinary)', 'rb').read().rstrip(b'\0'); open(r'$(NativeBinary)', 'wb').write(b)</PyTrimNull>
+		</PropertyGroup>
+		
+		<Exec Command="python -c &quot;$(PyTrimNull)&quot;"/>
+	</Target>
+
+	<Target Name="RemoveWin32Resources" BeforeTargets="LinkNative" Outputs="$(_Win32ResFile)">
+		<PropertyGroup>
+			<_Win32ResFile></_Win32ResFile>
+		</PropertyGroup>
+	</Target>
+
+	<Target Name="RemoveSDKLibs" AfterTargets="SetupOSSpecificProps">
+		<ItemGroup>
+			<LinkerArg Remove="@(NativeLibrary->'&quot;%(Identity)&quot;')"/>
+		</ItemGroup>
+	</Target>
+	
+	<!-- The project file pretends this is .NET, but it's not .NET. Remove all assembly references the .NET SDK added. -->
+	<Target Name="CustomizeReferences" BeforeTargets="BeforeCompile" AfterTargets="FindReferenceAssembliesForReferences">
+		<ItemGroup>
+			<ReferencePathWithRefAssemblies Remove="@(ReferencePathWithRefAssemblies)" />
+			<ReferencePath Remove="@(ReferencePath)" />
+		</ItemGroup>
+	</Target>
+
+	<!-- The AOT compiler would want to mirror these as AppContext switches. Prevent that. -->
+	<Target Name="RemoveHostConfigurationOptions" BeforeTargets="WriteIlcRspFileForCompilation" DependsOnTargets="PrepareForILLink">
+		<ItemGroup>
+			<RuntimeHostConfigurationOption Remove="@(RuntimeHostConfigurationOption)" />
+		</ItemGroup>
+	</Target>
+
+</Project>

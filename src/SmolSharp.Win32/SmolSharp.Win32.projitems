@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>29d02aaa-5c78-42ed-b1b4-5b30357d78a7</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SmolSharp.Win32</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)CompressAPI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GDI\Gdi32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GDI\GDIPaintStruct.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GDI\GDIPoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GDI\GDIRect.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GDI\OpenGL\GL.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GDI\OpenGL\PixelFormatDescriptor.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Kernel32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)User32.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WindowClassA.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WinMM.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WndMessage.cs" />
+  </ItemGroup>
+</Project>

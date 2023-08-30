@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>5898fe8d-6758-42d0-9303-2aeaae32c47b</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>BFlat.ZeroLib</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Startup.Efi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Startup.Unix.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Startup.Windows.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Internal\Stubs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\AppContext.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Array.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Attribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Console.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Console.Efi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Console.Unix.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Console.Windows.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Delegate.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Enum.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Environment.Efi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Environment.Unix.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Environment.Windows.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Nullable.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Object.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Primitives.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\ReadOnlySpan.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Reflection\ReflectionAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\RuntimeHandles.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Runtime\CompilerServices\ClassConstructorRunner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Runtime\CompilerServices\CompilerAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Runtime\CompilerServices\RuntimeFeature.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Runtime\CompilerServices\RuntimeHelpers.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Runtime\CompilerServices\Unsafe.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Runtime\InteropServices\InteropAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Runtime\InteropServices\MemoryMarshal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\String.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Thread.Efi.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Thread.Unix.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Thread.Windows.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Type.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\ValueTuple.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\ValueType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UnmanagedExports.cs" />
+  </ItemGroup>
+</Project>
