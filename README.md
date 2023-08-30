@@ -1,6 +1,6 @@
 
 # 🐜 SmolSharp
-SmolSharp is repository that demonstrates the ability to use NativeAOT to build extremely small binaries without any kind of external utility or linker. For example, for a simple hello world program, by default, NAOT produces a binary that is `2998272` bytes in size with the following properties:
+SmolSharp is a repository that demonstrates the ability to use NativeAOT to build extremely small binaries without any kind of external utility or linker. For example, for a simple hello world program, by default, NAOT produces a binary that is `2998272` bytes in size with the following properties:
 ```xml
 <PublishAot>true</PublishAot>
 <Optimize>true</Optimize>
