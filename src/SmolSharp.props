@@ -60,12 +60,35 @@
 		<Exec Command="objcopy -w --set-section-alignment *=1 &quot;$(NativeObject)&quot;" />
 	</Target>
 
-	<Target Name="ModifyBinary" AfterTargets="LinkNative">
-		<PropertyGroup>
-			<PyTrimNull>b = open(r'$(NativeBinary)', 'rb').read().rstrip(b'\0'); open(r'$(NativeBinary)', 'wb').write(b)</PyTrimNull>
-		</PropertyGroup>
+	<UsingTask
+		  TaskName="TrimNullBytes"
+		  TaskFactory="RoslynCodeTaskFactory"
+		  AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll"
+	>
+		<ParameterGroup>
+			<TargetPath ParameterType="System.String" Required="true"/>
+		</ParameterGroup>
 		
-		<Exec Command="python -c &quot;$(PyTrimNull)&quot;"/>
+		<Task>
+			<Using Namespace="System"/>
+			<Using Namespace="System.IO"/>
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+				var file = File.ReadAllBytes(TargetPath);
+				int i = file.Length - 1;
+				while (file[i] == 0x00)
+					--i;
+
+				byte[] trimmed = new byte[i + 1];
+				Array.Copy(file, trimmed, i + 1);
+				File.WriteAllBytes(TargetPath, trimmed);
+				]]>
+			</Code>
+		</Task>
+	</UsingTask>
+
+	<Target Name="ModifyBinary" AfterTargets="LinkNative">
+		<TrimNullBytes TargetPath="$(NativeBinary)"/> 
 	</Target>
 
 	<Target Name="RemoveWin32Resources" BeforeTargets="LinkNative" Outputs="$(_Win32ResFile)">
