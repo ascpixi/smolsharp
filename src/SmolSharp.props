@@ -1,11 +1,11 @@
 <Project>
-    <PropertyGroup>
-        <DefineConstants>WINDOWS</DefineConstants>
-        <PublishAot>true</PublishAot>
-        <ImplicitUsings>disable</ImplicitUsings>
-    </PropertyGroup>
+	<PropertyGroup>
+		<DefineConstants>WINDOWS</DefineConstants>
+		<PublishAot>true</PublishAot>
+		<ImplicitUsings>disable</ImplicitUsings>
+	</PropertyGroup>
 
-    <!-- Use bflat's zerolib as the standard library -->
+	<!-- Use bflat's zerolib as the standard library -->
 	<!-- See https://github.com/bflattened/bflat/ for more details! -->
 	<Import Project=".\BFlat.ZeroLib\BFlat.ZeroLib.projitems" Label="Shared" />
 	<PropertyGroup>
@@ -22,7 +22,7 @@
 		<DebugType>none</DebugType>
 	</PropertyGroup>
 
-    <ItemGroup>
+	<ItemGroup>
 		<DirectPInvoke Include="kernel32" />
 		<DirectPInvoke Include="shell32" />
 		<DirectPInvoke Include="user32" />
