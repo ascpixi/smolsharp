@@ -212,7 +212,7 @@ namespace SmolSharp.Ocean
 
             do {
                 //GL.SetClearColor(0f, 0f, 0f, 1f);
-                GL.Clear(GL.COLOR_BUFFER_BIT);
+                //GL.Clear(GL.COLOR_BUFFER_BIT);
 
                 uint timeMs = WinMM.GetTime() - begin;
                 float time = timeMs / 1000f;
