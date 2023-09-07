@@ -14,7 +14,7 @@ With the `SmolSharp.props` file being imported, the compiler produces a binary t
 | ---------------- | ----------- | ------------------------------------------------------------------ |
 | HelloWorld       | 2069 B      | A console program that outputs "Hello World".
 | Mandelbrot       | 3197 B      | A windowed program that renders a fractal (the Mandelbrot set).
-| Ocean            | 7693 B      | A windowed OpenGL program that renders a ray-marched stylized ocean.
+| Ocean            | 7629 B      | A windowed OpenGL program that renders a ray-marched stylized ocean.
 
 https://github.com/ascpixi/smolsharp/assets/44982772/c70e1e20-7cef-473d-bbf5-67079bec2487
 ###### Screen capture of the Ocean demo
