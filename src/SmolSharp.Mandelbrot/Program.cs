@@ -7,7 +7,7 @@ namespace SmolSharp.Raytracer
 {
     internal static class Program
     {
-        static void Main(string[] args) { }
+        static void Main() { }
 
         [UnmanagedCallersOnly(EntryPoint = "smolsharp_main")]
         public static unsafe int UnmanagedMain(nint hInstance, nint hPrevInstance, char* pCmdLine, int nCmdShow)

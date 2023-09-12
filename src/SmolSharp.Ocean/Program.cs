@@ -12,7 +12,7 @@ namespace SmolSharp.Ocean
         static ushort windowWidth, windowHeight;
         static bool windowDimensionsChanged;
 
-        static void Main(string[] args) { }
+        static void Main() { }
 
         [UnmanagedCallersOnly(EntryPoint = "smolsharp_main")]
         public static unsafe int UnmanagedMain(nint hInstance, nint hPrevInstance, char* pCmdLine, int nCmdShow)
