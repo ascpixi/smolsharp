@@ -17,8 +17,6 @@
 		<IlcSystemModule>$(MSBuildProjectName)</IlcSystemModule>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<EntryPointSymbol>smolsharp_main</EntryPointSymbol>
-		<PublishTrimmed>true</PublishTrimmed>
-		<TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
 		<DebugType>none</DebugType>
 	</PropertyGroup>
 
@@ -41,6 +39,7 @@
 		<LinkerArg Include="/nodefaultlib"></LinkerArg>
 		<LinkerArg Include="/fixed"></LinkerArg> <!-- disabling relocations makes the linker skip emitting the .reloc section, which saves us about ~100 bytes -->
 		<LinkerArg Include="/merge:.modules=.rdata"></LinkerArg>
+		<LinkerArg Include="/merge:.managedcode=.text"></LinkerArg>
 		<LinkerArg Include="user32.lib"></LinkerArg>
 		<LinkerArg Include="shell32.lib"></LinkerArg>
 		<LinkerArg Include="gdi32.lib"></LinkerArg>
@@ -48,9 +47,11 @@
 
 	<PropertyGroup>
 		<IlcDisableReflection>true</IlcDisableReflection>
-		<DynamicCodeSupport>false</DynamicCodeSupport>
-		<IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+		<StackTraceSupport>false</StackTraceSupport> <!-- .NET 8+ -->
+		<IlcGenerateStackTraceData>false</IlcGenerateStackTraceData> <!-- < .NET 8 -->
 		<IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+		<IlcDehydrate>false</IlcDehydrate>
+		<IlcGenerateWin32Resources>false</IlcGenerateWin32Resources> <!-- .NET 8 -->
 		<Optimize>true</Optimize>
 		<OptimizationPreference>Size</OptimizationPreference>
 	</PropertyGroup>
@@ -91,6 +92,15 @@
 		<TrimNullBytes TargetPath="$(NativeBinary)"/> 
 	</Target>
 
+	<Target Name="RemoveIlcSwitches" BeforeTargets="IlcCompile" DependsOnTargets="WriteIlcRspFileForCompilation">
+		<ItemGroup>
+			<IlcArg Remove="--runtimeknob:RUNTIME_IDENTIFIER=win-x64" />
+			<IlcArg Remove="--resilient" />
+		</ItemGroup>
+		<WriteLinesToFile File="%(ManagedBinary.IlcRspFile)" Lines="@(IlcArg)" Overwrite="true" WriteOnlyWhenDifferent="true" />
+	</Target>
+
+	<!-- < .NET 8 -->
 	<Target Name="RemoveWin32Resources" BeforeTargets="LinkNative" Outputs="$(_Win32ResFile)">
 		<PropertyGroup>
 			<_Win32ResFile></_Win32ResFile>

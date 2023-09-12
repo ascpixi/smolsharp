@@ -7,23 +7,23 @@ SmolSharp is a repository that demonstrates the ability to use NativeAOT to buil
 <OptimizationPreference>Size</OptimizationPreference>
 <PublishTrimmed>true</PublishTrimmed>
 ```
-With the `SmolSharp.props` file being imported, the compiler produces a binary that is only `2069` bytes in size - a 0.07% of the original file-size.
+With the `SmolSharp.props` file being imported, the compiler produces a binary that is only `2021` bytes in size - a 0.07% of the original file-size.
 
 ## Project overview
 | Project Name     | Binary size | Description                                                        |
 | ---------------- | ----------- | ------------------------------------------------------------------ |
-| HelloWorld       | 2069 B      | A console program that outputs "Hello World".
-| Mandelbrot       | 3197 B      | A windowed program that renders a fractal (the Mandelbrot set).
-| Ocean            | 7629 B      | A windowed OpenGL program that renders a ray-marched stylized ocean.
+| HelloWorld       | 2021 B      | A console program that outputs "Hello World".
+| Mandelbrot       | 2879 B      | A windowed program that renders a fractal (the Mandelbrot set).
+| Ocean            | 7316 B      | A windowed OpenGL program that renders a ray-marched stylized ocean.
 
 https://github.com/ascpixi/smolsharp/assets/44982772/c70e1e20-7cef-473d-bbf5-67079bec2487
 ###### Screen capture of the Ocean demo
 
 ## How does it work
 All of the functionality of SmolSharp is contained in the `SmolSharp.props` file. The following techniques are employed in order to achieve minimal binary sizes:
-1.  **Custom standard library** - SmolSharp uses the BFlat zerolib standard library, serving as the primary size-saving technique. However, this results in the lack of any kind of GC and removes all built-in BCL classes and functionality, requiring the use of raw P/Invokes to interface with Windows' APIs.
+1.  **Custom standard library** - SmolSharp uses the [bflat zerolib](https://github.com/bflattened/bflat/tree/master/src/zerolib) standard library, serving as the primary size-saving technique. However, this results in the lack of any kind of GC and removes all built-in BCL classes and functionality, requiring the use of raw P/Invokes to interface with Windows' APIs.
 2. **Raw P/Invokes** - all external `[DllImport]` declarations are specified in the `<DirectPInvoke>` list in the MSBuild `.props` file, removing the need for a dynamic loader. To prevent redundant `RhpReversePInvoke` calls, every `[DllImport]` is marked with the `[SuppressGCTransition]` attribute.
-3. **ILC configuration** - several MSBuild properties instruct the IL compiler (ILC) to optimize and generate code with binary size as its top priority. All Win32 resources (usually embedded in the `.rsrc` section) are omitted by setting the internal property `_Win32ResFile` to an empty string, in a target that executes before the `LinkNative` target.
+3. **ILC configuration** - several MSBuild properties instruct the IL compiler (ILC) to optimize and generate code with binary size as its top priority. All Win32 resources (usually embedded in the `.rsrc` section) are omitted by setting the internal property `_Win32ResFile` to an empty string, in a target that executes before the `LinkNative` target (or for .NET 8+, by setting an undocumented property).
 4. **Native object file manipulation** - the alignment of all sections in the native object file is set to their minimum accepted value using `objcopy`. Additionally, since no exception handling is used, the SEH exception data directory (the `.pdata` section) is removed.
 5. **Linker flags** - several MSVC linker flags are specified, significantly reducing the size of the final binary image:
 	- `/align:16` - sets section alignment to 16 bytes, which, based on testing, is the minimum accepted value
@@ -35,6 +35,7 @@ All of the functionality of SmolSharp is contained in the `SmolSharp.props` file
 	- `/nodefaultlib` - excludes CRT libraries from the binary
 	- `/fixed` - instructs the operating system to load the binary at a static address, disabling relocations and making the linker skip emitting the `.reloc` section
 	- `/merge:.modules=.rdata` - merges the `.modules` and `.rdata` sections due to their identical attributes.
+	- `/merge:.managedcode=.text` - merges the `.managedcode` and `.text` sections due to their identical attributes.
 6. **Finishing touches** - all trailing null bytes are stripped from the binary.
 Please note that this is not bound to MSBuild - this can also be achieved with calling `ilc` calling the linker manually, as demonstrated by the [`MichalStrehovsky/zerosharp`](https://github.com/MichalStrehovsky/zerosharp) repository.
 
