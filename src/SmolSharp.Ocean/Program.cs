@@ -145,14 +145,14 @@ namespace SmolSharp.Ocean
             var compressedFragShader = OceanShader.FragmentShader();
             var fragBuffer = Kernel32.GlobalAlloc(default, 8192);
             nint hDcmp;
-            ulong fragLength;
+            nint fragLength;
             bool success;
 
             success = CompressAPI.CreateDecompressor(CompressAlgorithm.MSZip, default, &hDcmp);
             success = CompressAPI.Decompress(
                 hDcmp,
                 compressedFragShader.AsPointer(),
-                (ulong)compressedFragShader.Length,
+                compressedFragShader.Length,
                 fragBuffer,
                 8192,
                 &fragLength
