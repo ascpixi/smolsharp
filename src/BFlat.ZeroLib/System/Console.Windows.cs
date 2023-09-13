@@ -28,7 +28,7 @@ namespace System
             TRUE = 1,
         }
 
-        [DllImport("kernel32")]
+        [DllImport("kernel32", EntryPoint = "_GetStdHandle@4")]
         private static unsafe extern IntPtr GetStdHandle(int c);
 
         private readonly static IntPtr s_outputHandle = GetStdHandle(-11);
@@ -181,7 +181,7 @@ namespace System
             SetConsoleCursorPosition(s_outputHandle, new COORD { X = (short)x, Y = (short)y });
         }
 
-        [DllImport("kernel32", EntryPoint = "WriteConsoleW")]
+        [DllImport("kernel32", EntryPoint = "_WriteConsoleW@20")]
         private static unsafe extern BOOL WriteConsole(IntPtr handle, void* buffer, int numChars, int* charsWritten, void* reserved);
 
         public static unsafe void Write(char c)
