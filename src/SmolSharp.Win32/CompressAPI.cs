@@ -16,10 +16,10 @@ namespace SmolSharp.Win32
         public static extern bool Decompress(
             nint decompressorHandle,
             void* compressedData,
-            ulong compressedDataSize,
+            nint compressedDataSize,
             void* uncompressedBuffer,
             nint uncompressedBufferSize,
-            ulong* uncompressedDataSize
+            nint* uncompressedDataSize
         );
     }
 
