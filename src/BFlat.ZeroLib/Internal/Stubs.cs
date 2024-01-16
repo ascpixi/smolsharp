@@ -161,7 +161,7 @@ assigningNull:
         static unsafe MethodTable** AllocObject(uint size)
         {
 #if WINDOWS
-            [DllImport("kernel32")]
+            [DllImport("kernel32", EntryPoint = "_LocalAlloc@8")]
             static extern MethodTable** LocalAlloc(uint flags, uint size);
             MethodTable** result = LocalAlloc(0x40, size);
 #elif LINUX

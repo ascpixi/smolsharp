@@ -15,11 +15,11 @@ namespace SmolSharp.Win32.GDI.OpenGL
         public const uint TRIANGLES = 0x4;
 
         [SuppressGCTransition]
-        [DllImport("opengl32", EntryPoint = "wglCreateContext")]
+        [DllImport("opengl32", EntryPoint = "_wglCreateContext@4")]
         public static extern nint CreateContext(nint hdc);
 
         [SuppressGCTransition]
-        [DllImport("opengl32", EntryPoint = "wglMakeCurrent")]
+        [DllImport("opengl32", EntryPoint = "_wglMakeCurrent@8")]
         public static extern bool MakeCurrent(nint hdc, nint ctx);
 
         [SuppressGCTransition]
@@ -31,11 +31,11 @@ namespace SmolSharp.Win32.GDI.OpenGL
         public static extern void Clear(uint mask);
 
         [SuppressGCTransition]
-        [DllImport("opengl32", EntryPoint = "wglGetProcAddress")]
+        [DllImport("opengl32", EntryPoint = "_wglGetProcAddress@4")]
         public static unsafe extern void* GetProcAddress(byte* name);
 
         [SuppressGCTransition]
-        [DllImport("opengl32", EntryPoint = "glDrawArrays")]
+        [DllImport("opengl32", EntryPoint = "_glDrawArrays@12")]
         public static extern void DrawArrays(
             uint mode,
             int first,
@@ -43,7 +43,7 @@ namespace SmolSharp.Win32.GDI.OpenGL
         );
 
         [SuppressGCTransition]
-        [DllImport("opengl32", EntryPoint = "glViewport")]
+        [DllImport("opengl32", EntryPoint = "_glViewport@16")]
         public static extern void Viewport(int x, int y, uint width, uint height);
 
         [SuppressGCTransition]

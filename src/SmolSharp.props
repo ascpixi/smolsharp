@@ -43,6 +43,7 @@
 		<LinkerArg Include="user32.lib"></LinkerArg>
 		<LinkerArg Include="shell32.lib"></LinkerArg>
 		<LinkerArg Include="gdi32.lib"></LinkerArg>
+		<LinkerArg Include="&quot;$(IntermediateOutputPath)x86-stubs.obj&quot;"></LinkerArg>
 	</ItemGroup>
 
 	<PropertyGroup>
@@ -105,6 +106,16 @@
 		<PropertyGroup>
 			<_Win32ResFile></_Win32ResFile>
 		</PropertyGroup>
+	</Target>
+
+	<Target Name="RewriteToX86" BeforeTargets="SetupOSSpecificProps">
+		<PropertyGroup>
+			<_targetArchitecture>x86</_targetArchitecture>
+		</PropertyGroup>
+	</Target>
+
+	<Target Name="BuildX86Stubs" AfterTargets="SetupOSSpecificProps" BeforeTargets="LinkNative">
+		<Exec Command="&quot;$(_CppToolsDirectory)\ml.exe&quot; /c /Fo&quot;$(IntermediateOutputPath)x86-stubs.obj&quot; &quot;$(MSBuildThisFileDirectory)x86-stubs.asm&quot;" />
 	</Target>
 
 	<Target Name="RemoveSDKLibs" AfterTargets="SetupOSSpecificProps">

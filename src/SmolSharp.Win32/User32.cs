@@ -7,7 +7,7 @@ namespace SmolSharp.Win32
     internal static unsafe class User32
     {
         [SuppressGCTransition]
-        [DllImport("user32", EntryPoint = "CreateWindowExA")]
+        [DllImport("user32", EntryPoint = "_CreateWindowExA@48")]
         public static extern nint CreateWindowEx(
             uint dwExStyles,
             void* lpClassName,
@@ -24,15 +24,15 @@ namespace SmolSharp.Win32
         );
 
         [SuppressGCTransition]
-        [DllImport("user32", EntryPoint = "RegisterClassA")]
+        [DllImport("user32", EntryPoint = "_RegisterClassA@4")]
         public static extern nint RegisterClass(WindowClassA* lpWndClass);
 
         [SuppressGCTransition]
-        [DllImport("user32", EntryPoint = "ShowWindow")]
+        [DllImport("user32", EntryPoint = "_ShowWindow@8")]
         public static extern nint ShowWindow(nint hWnd, int nCmdShow);
 
         [SuppressGCTransition]
-        [DllImport("user32", EntryPoint = "GetMessageA")]
+        [DllImport("user32", EntryPoint = "_GetMessageA@16")]
         public static extern int GetMessage(
             WndMessage* lpMsg,
             nint hwnd,
@@ -45,11 +45,11 @@ namespace SmolSharp.Win32
         public static extern bool TranslateMessage(WndMessage* lpMsg);
 
         [SuppressGCTransition]
-        [DllImport("user32", EntryPoint = "DispatchMessageA")]
+        [DllImport("user32", EntryPoint = "_DispatchMessageA@4")]
         public static extern bool DispatchMessage(WndMessage* lpMsg);
 
         [SuppressGCTransition]
-        [DllImport("user32", EntryPoint = "DefWindowProcA")]
+        [DllImport("user32", EntryPoint = "_DefWindowProcA@16")]
         public static extern nint DefWindowProc(
             nint hwnd,
             uint msg,
@@ -58,7 +58,7 @@ namespace SmolSharp.Win32
         );
 
         [SuppressGCTransition]
-        [DllImport("user32")]
+        [DllImport("user32", EntryPoint = "_GetDC@4")]
         public static extern nint GetDC(nint hwnd);
 
         //[DllImport("user32")]

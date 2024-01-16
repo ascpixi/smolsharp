@@ -27,7 +27,7 @@ namespace System
 
         public static long TickCount64 => GetTickCount64();
 
-        [DllImport("kernel32")]
+        [DllImport("kernel32", EntryPoint = "_RaiseFailFastException@12")]
         private static extern void RaiseFailFastException(IntPtr a, IntPtr b, int flags);
 
         public static void FailFast(string message)
